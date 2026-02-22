@@ -15,7 +15,11 @@ class Procm < Formula
   end
 
   def install
-    bin.install "procm"
+    if Hardware::CPU.arm?
+      bin.install "procm-darwin-arm64" => "procm"
+    else
+      bin.install "procm-darwin-x86_64" => "procm"
+    end
   end
 
   test do
