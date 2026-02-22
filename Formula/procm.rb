@@ -5,21 +5,17 @@ class Procm < Formula
   license "MIT"
 
   on_arm do
-    url "https://github.com/lovincyrus/procm/releases/download/v0.0.2/procm-darwin-arm64"
-    sha256 "69b6bbc6315cea823b59268f1eba1188626b9ca05a9a3c8b0ca3ae7eb94dbdfd"
+    url "https://github.com/lovincyrus/procm/releases/download/v0.0.2/procm-darwin-arm64.tar.gz"
+    sha256 "ea8bb42851c56e80dfd3da4bf4dfe4ad0efa7e04fca0765930d0f2a06c1968b9"
   end
 
   on_intel do
-    url "https://github.com/lovincyrus/procm/releases/download/v0.0.2/procm-darwin-x86_64"
-    sha256 "a5586517a9bb2cf056c13dc562e1e062d02ed9044c2843cb3d81a16db8d66604"
+    url "https://github.com/lovincyrus/procm/releases/download/v0.0.2/procm-darwin-x86_64.tar.gz"
+    sha256 "edef6405376034611156dc1690240c6e47ddc74fdb7d8a5a387eea0b7d09df8a"
   end
 
   def install
-    if Hardware::CPU.arm?
-      bin.install "procm-darwin-arm64" => "procm"
-    else
-      bin.install "procm-darwin-x86_64" => "procm"
-    end
+    bin.install "procm"
   end
 
   test do
