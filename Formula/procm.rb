@@ -1,22 +1,24 @@
 class Procm < Formula
   desc "Terminal process manager with sorting, filtering, and kill/restart"
   homepage "https://github.com/lovincyrus/procm"
-  url "https://github.com/lovincyrus/procm/archive/refs/tags/v0.0.1.tar.gz"
-  sha256 "6cc1f1cfc8cd02d2c270eecba59d19b2b559cb835d3e7a2c43fe3a38d619f437"
+  version "0.0.2"
   license "MIT"
 
-  depends_on "bun"
+  on_arm do
+    url "https://github.com/lovincyrus/procm/releases/download/v0.0.2/procm-darwin-arm64"
+    sha256 "69b6bbc6315cea823b59268f1eba1188626b9ca05a9a3c8b0ca3ae7eb94dbdfd"
+  end
+
+  on_intel do
+    url "https://github.com/lovincyrus/procm/releases/download/v0.0.2/procm-darwin-x86_64"
+    sha256 "a5586517a9bb2cf056c13dc562e1e062d02ed9044c2843cb3d81a16db8d66604"
+  end
 
   def install
-    system "bun", "install"
-    libexec.install Dir["*"]
-    (bin/"procm").write <<~EOS
-      #!/bin/bash
-      exec "#{Formula["bun"].opt_bin}/bun" "#{libexec}/index.ts" "$@"
-    EOS
+    bin.install "procm"
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/procm --version 2>&1", 1)
+    assert_match version.to_s, shell_output("#{bin}/procm --version")
   end
 end
